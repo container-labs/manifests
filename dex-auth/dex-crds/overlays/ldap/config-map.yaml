@@ -35,12 +35,12 @@ data:
           # Because this option inherently leaks passwords to anyone on the same network
           # as dex, THIS OPTION MAY BE REMOVED WITHOUT WARNING IN A FUTURE RELEASE.
           #
-          insecureNoSSL: true
-          # If a custom certificate isn't provide, this option can be used to turn on
+          insecureNoSSL: $(insecure_no_ssl)
+          # If a custom certificate isn't provided, this option can be used to turn on
           # TLS certificate checks. As noted, it is insecure and shouldn't be used outside
           # of explorative phases.
           #
-          insecureSkipVerify: true
+          insecureSkipVerify: $(insecure_skip_verify)
           # When connecting to the server, connect using the ldap:// protocol then issue
           # a StartTLS command. If unspecified, connections will use the ldaps:// protocol
           #

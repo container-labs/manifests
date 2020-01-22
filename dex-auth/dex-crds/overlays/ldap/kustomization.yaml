@@ -57,5 +57,19 @@ vars:
     apiVersion: v1
   fieldref:
     fieldpath: data.start_tls
+- name: insecure_no_ssl
+  objref:
+    kind: ConfigMap
+    name: dex-parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.insecure_no_ssl
+- name: insecure_skip_verify
+  objref:
+    kind: ConfigMap
+    name: dex-parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.insecure_skip_verify
 configurations:
 - params.yaml
