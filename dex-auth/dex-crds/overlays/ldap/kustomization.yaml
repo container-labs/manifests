@@ -50,5 +50,12 @@ vars:
     apiVersion: v1
   fieldref:
     fieldpath: data.ldap_group_base_dn
+- name: start_tls
+  objref:
+    kind: ConfigMap
+    name: dex-parameters
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.start_tls
 configurations:
 - params.yaml

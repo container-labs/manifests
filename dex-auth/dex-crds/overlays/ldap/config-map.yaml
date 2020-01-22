@@ -44,7 +44,7 @@ data:
           # When connecting to the server, connect using the ldap:// protocol then issue
           # a StartTLS command. If unspecified, connections will use the ldaps:// protocol
           #
-          # startTLS: true
+          startTLS: $(start_tls)
           # Path to a trusted root certificate file. Default: use the host's root CA.
           #rootCA: /etc/dex/ldap.ca
           # A raw certificate file can also be provided inline.
