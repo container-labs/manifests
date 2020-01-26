@@ -65,7 +65,7 @@ data:
             filter: "(objectClass=posixAccount)"
             # username attribute used for comparing user entries. This will be translated
             # and combine with the other filter as "(<attr>=<username>)".
-            username: mail
+            username: cn
             # The following three fields are direct mappings of attributes on the user entry.
             # String representation of the user.
             idAttr: uid
