@@ -23,18 +23,18 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/name: profiles
-      app.kubernetes.io/instance: profiles-v0.7.0
+      app.kubernetes.io/instance: profiles-v1.0.0
       app.kubernetes.io/managed-by: kfctl
       app.kubernetes.io/component: profiles
       app.kubernetes.io/part-of: kubeflow
-      app.kubernetes.io/version: v0.7.0
+      app.kubernetes.io/version: v1.0.0
   componentKinds:
+  - group: rbac.authorization.k8s.io
+    kind: ClusterRole
+  - group: rbac.authorization.k8s.io
+    kind: ClusterRoleBinding
   - group: apps
     kind: Deployment
-  - group: rbac.authorization.k8s.io
-    kind: RoleBinding
-  - group: rbac.authorization.k8s.io
-    kind: Role
   - group: core
     kind: ServiceAccount
   - group: core
@@ -43,16 +43,22 @@ spec:
     kind: Profile
   descriptor:
     type: profiles
-    version: v1beta1
+    version: v1
     description: ""
-    maintainers: []
-    owners: []
+    maintainers:
+    - name: Kunming Qu
+      email: kunming@google.com
+    owners:
+    - name: Kunming Qu
+      email: kunming@google.com
     keywords:
      - profiles
      - kubeflow
     links:
-    - description: About
-      url: ""
+    - description: profiles
+      url: "https://github.com/kubeflow/kubeflow/tree/master/components/profile-controller"
+    - description: kfam
+      url: "https://github.com/kubeflow/kubeflow/tree/master/components/access-management"
   addOwnerRef: true
 `)
 	th.writeK("/manifests/profiles/overlays/application", `
@@ -245,8 +251,7 @@ status:
     kind: ""
     plural: ""
   conditions: []
-  storedVersions: []
-`)
+  storedVersions: []`)
 	th.writeF("/manifests/profiles/base/deployment.yaml", `
 apiVersion: apps/v1
 kind: Deployment
@@ -302,8 +307,7 @@ metadata:
   name: kfam
 spec:
   ports:
-    - port: 8081
-`)
+    - port: 8081`)
 	th.writeF("/manifests/profiles/base/service-account.yaml", `
 apiVersion: v1
 kind: ServiceAccount
@@ -345,13 +349,15 @@ namespace: kubeflow
 commonLabels:
   kustomize.component: profiles
 configMapGenerator:
-- env: params.env
+- envs:
+  - params.env
   name: profiles-parameters
 images:
 - digest: sha256:bb1791ac42b34a5f9566b191fb093c3d40c7f73b6282398d1151706d4c8fffec
   name: gcr.io/kubeflow-images-public/kfam
-- digest: sha256:6d97928791c8d9f29ba1fa1cefccff34680e188dbb7b591d7f32e2e8717969bc
-  name: gcr.io/kubeflow-images-public/profile-controller
+- name: gcr.io/kubeflow-images-public/profile-controller
+  newName: gcr.io/kubeflow-images-public/profile-controller
+  newTag: vmaster-g34aa47c2
 vars:
 - fieldref:
     fieldPath: data.admin
