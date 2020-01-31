@@ -243,8 +243,7 @@ images:
   newTag: vmaster-gaf96e4e3
 namespace: kubeflow
 configMapGenerator:
-- envs:
-  - params.env
+- env: params.env
   name: admission-webhook-parameters
 generatorOptions:
   disableNameSuffixHash: true

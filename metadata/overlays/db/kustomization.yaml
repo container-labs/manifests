@@ -11,8 +11,7 @@ configMapGenerator:
   env: params.env
 secretGenerator:
 - name: metadata-db-secrets
-  envs:
-  - secrets.env
+  env: secrets.env
 bases:
 - ../../base
 resources:

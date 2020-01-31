@@ -16,8 +16,7 @@ images:
   newName: gcr.io/kubeflow-images-public/centraldashboard
   newTag: vmaster-gb1400446
 configMapGenerator:
-- envs:
-  - params.env
+- env: params.env
   name: parameters
 generatorOptions:
   disableNameSuffixHash: true
