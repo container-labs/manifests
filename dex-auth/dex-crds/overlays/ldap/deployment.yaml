@@ -10,10 +10,10 @@ spec:
       serviceAccountName: dex
       containers:
       - name: dex
-        volumeMounts:
-        - name: tls
-          mountPath: /etc/dex/tls
-      volumes:
-      - name: tls
-        secret:
-          secretName: $(dex_domain).tls
+      #   volumeMounts:
+      #   - name: tls
+      #     mountPath: /etc/dex/tls
+      # volumes:
+      # - name: tls
+      #   secret:
+      #     secretName: $(dex_domain).tls

@@ -11,11 +11,11 @@ data:
       config:
         inCluster: true
     web:
-      https: 0.0.0.0:5556
-      tlsCert: /etc/dex/tls/tls.crt
-      tlsKey: /etc/dex/tls/tls.key
+      #https: 0.0.0.0:5556
+      #tlsCert: /etc/dex/tls/tls.crt
+      #tlsKey: /etc/dex/tls/tls.key
       # For HTTP configuration remove tls configs and add
-      #http: 0.0.0.0:5556
+      http: 0.0.0.0:5556
     logger:
       level: "debug"
       format: text
@@ -35,16 +35,16 @@ data:
           # Because this option inherently leaks passwords to anyone on the same network
           # as dex, THIS OPTION MAY BE REMOVED WITHOUT WARNING IN A FUTURE RELEASE.
           #
-          insecureNoSSL: true
+          insecureNoSSL: $(insecure_no_ssl)
           # If a custom certificate isn't provided, this option can be used to turn on
           # TLS certificate checks. As noted, it is insecure and shouldn't be used outside
           # of explorative phases.
           #
-          insecureSkipVerify: true
+          insecureSkipVerify: $(insecure_skip_verify)
           # When connecting to the server, connect using the ldap:// protocol then issue
           # a StartTLS command. If unspecified, connections will use the ldaps:// protocol
           #
-          # startTLS: true
+          startTLS: $(start_tls)
           # Path to a trusted root certificate file. Default: use the host's root CA.
           #rootCA: /etc/dex/ldap.ca
           # A raw certificate file can also be provided inline.
@@ -65,7 +65,7 @@ data:
             filter: "(objectClass=posixAccount)"
             # username attribute used for comparing user entries. This will be translated
             # and combine with the other filter as "(<attr>=<username>)".
-            username: ${ldap_user_search_username}
+            username: cn
             # The following three fields are direct mappings of attributes on the user entry.
             # String representation of the user.
             idAttr: uid
